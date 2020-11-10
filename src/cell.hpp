@@ -12,11 +12,11 @@ public:
     /**
      * @brief Construct a new Cell object
      * 
-     * @param _x        - coords 'x' for the new Cell
-     * @param _y        - coords 'y' for the new Cell
-     * @param _isLife   - the state of a cell (alive/dead)
+     * @param x        - coords 'x' for the new Cell
+     * @param y        - coords 'y' for the new Cell
+     * @param isLife   - the state of a cell (alive/dead)
      */
-    Cell(short _x, short _y, bool _isLife);
+    Cell(short x, short y, bool isLife);
 
 
     // Simple getters
