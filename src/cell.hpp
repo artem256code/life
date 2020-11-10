@@ -1,6 +1,8 @@
 #ifndef CELL_HPP
 #define CELL_HPP
 
+#define CELL_SIZE 30
+
 /**
  * @brief The class describing one cell in the field 
  */

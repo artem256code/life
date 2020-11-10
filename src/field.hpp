@@ -9,7 +9,8 @@
  */
 class Field{
 private:
-    Cell **cells;       // Two-dimensional array describing Field
+    short rows, columns;
+    Cell ***cells;       // Two-dimensional array describing Field
 private:
     /**
      * @brief Check nearest 8 cells and return value 
@@ -22,10 +23,10 @@ public:
     /**
      * @brief Construct a new Field object
      * 
-     * @param _rows      - numbers of rows in the Field 
-     * @param _columns   - numbers of columns in the Field
+     * @param rows      - numbers of rows in the Field 
+     * @param columns   - numbers of columns in the Field
      */
-    Field(short _rows, short _columns);
+    Field(short rows, short columns);
     
     
     /**
