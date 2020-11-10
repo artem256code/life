@@ -24,7 +24,14 @@ public:
      * @param with   - width of the game window
      * @param height - height of the game window
      */
-    Game(std::string title,short with, short height);
+    Game(std::string title, short with, short height);
+
+
+    /**
+     * @brief Rendering full scene. 
+     *        Gets all the information using the "Field"
+     */
+    void render();
 
 };
 

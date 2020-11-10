@@ -25,3 +25,7 @@ Game::Game(std::string title,short with, short height){
         std::cout << "Failed create SDL_Renderer";
     }
 }
+
+void Game::render(){
+    SDL_RenderPresent(renderer);
+}
