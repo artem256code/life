@@ -1,10 +1,15 @@
 #include "game.hpp"
+#include <SDL2/SDL.h>
 #include <SDL2/SDL_render.h>
+#include <SDL2/SDL_stdinc.h>
+#include <SDL2/SDL_timer.h>
 #include <SDL2/SDL_video.h>
 #include <iostream>
-#include <SDL2/SDL.h>
 
-Game::Game(std::string title,short with, short height){
+
+Game::Game(std::string title,short width, short height): width(width), 
+    height(height), is_run(true), elapsed_time(0) {
+    
     if(SDL_Init(SDL_INIT_EVERYTHING) != 0){
         std::cout << "Failed init SDL lib...";
     }
@@ -25,6 +30,27 @@ Game::Game(std::string title,short with, short height){
         std::cout << "Failed create SDL_Renderer";
     }
 }
+
+
+bool Game::isRun(){
+    if(is_run)  return true;
+    return false;
+}
+
+void Game::clear(){
+    SDL_RenderClear(renderer);
+}
+
+
+void Game::update(){
+    //Some code...
+}
+
+
+void Game::wait(){
+    SDL_Delay(1000 / FPS);
+}
+
 
 void Game::render(){
     SDL_RenderPresent(renderer);

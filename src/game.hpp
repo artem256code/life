@@ -3,9 +3,12 @@
 
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_render.h>
+#include <SDL2/SDL_stdinc.h>
 #include <string>
 
 #include "field.hpp"
+
+#define FPS   30
 
 /**
  * @brief the main class of the game. 
@@ -13,9 +16,12 @@
  */
 class Game{
 private:    
-    SDL_Window *window;
-    SDL_Renderer *renderer;
-    Field *field;
+    SDL_Window *window;          
+    SDL_Renderer *renderer;     
+    Field *field;               
+    Uint32 elapsed_time;        // Elapsed time since the beginning of the game
+    short width, height;        // The sizes of the game window 
+    bool is_run;                // Is the game running? (true/false)
 public:
     /**
      * @brief Construct a new Game object
@@ -24,7 +30,36 @@ public:
      * @param with   - width of the game window
      * @param height - height of the game window
      */
-    Game(std::string title, short with, short height);
+    Game(std::string title, short width, short height);
+
+
+    /**
+     * @brief Returns the game condition 
+     * 
+     * @return true  - if the game is running
+     * @return false - if the game is stoping 
+     */
+    bool isRun();
+
+    /**
+     * @brief Clearing the full scene
+     * 
+     */
+    void clear();
+
+
+    /**
+     * @brief Processing the all logics with cells
+     *        
+     */
+    void update();
+
+
+    /**
+     * @brief Sleeping the some time = 1000 ms / FPS
+     * 
+     */
+    void wait();
 
 
     /**
