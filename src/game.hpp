@@ -2,6 +2,7 @@
 #define GAME_HPP
 
 #include <SDL2/SDL.h>
+#include <SDL2/SDL_events.h>
 #include <SDL2/SDL_render.h>
 #include <SDL2/SDL_stdinc.h>
 #include <string>
@@ -18,10 +19,17 @@ class Game{
 private:    
     SDL_Window *window;          
     SDL_Renderer *renderer;     
+    SDL_Event event;
     Field *field;               
     Uint32 elapsed_time;        // Elapsed time since the beginning of the game
     short width, height;        // The sizes of the game window 
     bool is_run;                // Is the game running? (true/false)
+private:
+    /**
+     * @brief Closing the game
+     * 
+     */
+    void close();
 public:
     /**
      * @brief Construct a new Game object
@@ -46,6 +54,13 @@ public:
      * 
      */
     void clear();
+
+
+    /**
+     * @brief Processing the all events in the game and 
+     *        running the nessesary functions  
+     */
+    void handleEvents();
 
 
     /**

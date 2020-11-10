@@ -1,6 +1,7 @@
 #include "game.hpp"
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_render.h>
+#include <SDL2/SDL_events.h>
 #include <SDL2/SDL_stdinc.h>
 #include <SDL2/SDL_timer.h>
 #include <SDL2/SDL_video.h>
@@ -31,6 +32,10 @@ Game::Game(std::string title,short width, short height): width(width),
     }
 }
 
+void Game::close(){
+    is_run = false;
+}
+
 
 bool Game::isRun(){
     if(is_run)  return true;
@@ -39,6 +44,21 @@ bool Game::isRun(){
 
 void Game::clear(){
     SDL_RenderClear(renderer);
+}
+
+
+void Game::handleEvents(){
+    while(SDL_PollEvent(&event)){
+        switch (event.type) {
+            case SDL_QUIT:      close();    break;
+            case SDL_KEYDOWN:   
+                // Some code...
+                break;
+            case SDL_MOUSEBUTTONDOWN:
+                // Some code...
+                break;
+        }
+    }
 }
 
 

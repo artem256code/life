@@ -5,7 +5,7 @@ int main(){
 
     while(game.isRun()){
         game.clear();
-        //Check input       TODO:Game.input(); 
+        game.handleEvents();
         game.update();
         game.render();
         game.wait();
