@@ -14,13 +14,25 @@ private:
     short rows, columns;
     Cell ***cells;              // Two-dimensional array describing Field
 private:
+
     /**
      * @brief Check nearest 8 cells and return value 
      * 
+     * @param row    -  row of this cell
+     * @param column -  column of this cell
      * @return true  - if cell will continue to live
-     * @return false - if cell must dead
+     * @return false - if cell must dead 
      */
-    bool checkCellForLife();
+    bool checkCellForLife(short row, short column);
+
+    /**
+     * @brief Get the Neighboars For Cell object
+     * 
+     * @param row       -  row of this cell
+     * @param column    -  column of this cell
+     * @return short    -  numbers of the neighbors
+     */
+    short getNeighborsForCell(short row, short column);
 public:
     /**
      * @brief Construct a new Field object
