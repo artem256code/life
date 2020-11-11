@@ -1,4 +1,6 @@
 #include "game.hpp"
+#include "cell.hpp"
+#include "field.hpp"
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_render.h>
 #include <SDL2/SDL_events.h>
@@ -6,6 +8,9 @@
 #include <SDL2/SDL_timer.h>
 #include <SDL2/SDL_video.h>
 #include <iostream>
+
+
+SDL_Renderer* Game::renderer;     
 
 
 Game::Game(std::string title,short width, short height): width(width), 
@@ -30,6 +35,8 @@ Game::Game(std::string title,short width, short height): width(width),
     if(renderer == nullptr){
         std::cout << "Failed create SDL_Renderer";
     }
+
+    field = new Field(height/CELL_SIZE, width/CELL_SIZE);
 }
 
 void Game::close(){
@@ -73,5 +80,10 @@ void Game::wait(){
 
 
 void Game::render(){
+    field->render(renderer);
     SDL_RenderPresent(renderer);
+}
+
+SDL_Renderer* Game::getRenderer(){
+    return renderer;
 }

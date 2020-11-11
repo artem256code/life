@@ -18,7 +18,7 @@
 class Game{
 private:    
     SDL_Window *window;          
-    SDL_Renderer *renderer;     
+    static SDL_Renderer *renderer;      
     SDL_Event event;
     Field *field;               
     Uint32 elapsed_time;        // Elapsed time since the beginning of the game
@@ -82,6 +82,14 @@ public:
      *        Gets all the information using the "Field"
      */
     void render();
+
+
+    /**
+     * @brief Get the Renderer object
+     * 
+     * @return SDL_Renderer* - object Rendrer
+     */
+    static SDL_Renderer* getRenderer();
 
 };
 
