@@ -2,6 +2,8 @@
 #define FIELD_HPP
 
 #include "cell.hpp"
+#include <SDL2/SDL_render.h>
+#include <string>
 
 /**
  * @brief The gaming Field which consists of Cell
@@ -10,7 +12,7 @@
 class Field{
 private:
     short rows, columns;
-    Cell ***cells;       // Two-dimensional array describing Field
+    Cell ***cells;              // Two-dimensional array describing Field
 private:
     /**
      * @brief Check nearest 8 cells and return value 
@@ -33,7 +35,7 @@ public:
      * @brief Rendering Field 
      * 
      */
-    void render();
+    void render(SDL_Renderer *renderer);
 };
 
 #endif
