@@ -20,12 +20,12 @@ Field::Field(short rows, short columns): rows(rows), columns(columns) {
 void Field::render(SDL_Renderer *renderer){
     for(short row = 0; row < rows; row++){
         for(short col = 0; col < columns; col++){
-            if(cells[row][col]){
+            if(cells[row][col]->isAlife()){
                 SDL_Rect renderRect = { col*CELL_SIZE,
                                         row*CELL_SIZE,
                                         CELL_SIZE,
                                         CELL_SIZE};
-                SDL_SetRenderDrawColor(renderer, 0xff, 0xff, 0xff, 0xff);
+                SDL_SetRenderDrawColor(renderer, 0x6A, 0xCA, 0x59, 0xff);
                 SDL_RenderDrawRect(renderer, &renderRect);
             }
         }
