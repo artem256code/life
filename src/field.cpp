@@ -19,9 +19,34 @@ Field::Field(short rows, short columns): rows(rows), columns(columns) {
 }
 
 
+short Field::getIndexCell(short row, short column, short offset, short step){
+    short index = row*columns+column;
+    for(int i = 0; i < offset; i++){
+        index += step;
+        if(step < 0 && index > rows*columns)    index = 0;
+        else if(step < 0 && index < 0)          index = rows*columns-1;
+    }
+    return index;
+}
+
+
 short Field::getNeighborsForCell(short row, short column){
     short neighbors = 0;        //Number of neighboring cells
     
+    // Upper neighbors
+    for(int i = 0; i < 3; i++){
+        neighbors += cells[getIndexCell(row, column, columns-i, -1)]->isAlife();
+    }
+    
+    // Average neighbors
+    neighbors += cells[getIndexCell(row, column, 1, 1)]->isAlife();
+    neighbors += cells[getIndexCell(row, column, 1, -1)]->isAlife();
+    
+    // Lower neighbors
+    for(int i = 0; i < 3; i++){
+        neighbors += cells[getIndexCell(row, column, columns-i, 1)]->isAlife();
+    }
+
     return neighbors;
 }
 
