@@ -2,16 +2,18 @@
 #include <SDL2/SDL_surface.h>
 #include "cell.hpp"
 #include "field.hpp"
-
+#include <SDL2/SDL_timer.h>
+#include <iostream>
 
 Field::Field(short rows, short columns): rows(rows), columns(columns) {
-    cells = new Cell**[rows];
-    for(short row = 0; row < rows; row++){
-        cells[row] = new Cell*[columns];
-        short y = row * CELL_SIZE;
+    cells = new Cell*[rows*columns];
+    short y = 0;
+    for(int row = 0; row < rows; row++){
+        short x = 0;
+        y += CELL_SIZE;
         for(int col = 0; col < columns; col++){
-            short x = col * CELL_SIZE;
-            cells[row][col] = new Cell(x, y, false);
+            x += CELL_SIZE;
+            cells[row*columns + col] = new Cell(x, y, false);
         }
     }
 }
@@ -19,29 +21,6 @@ Field::Field(short rows, short columns): rows(rows), columns(columns) {
 
 short Field::getNeighborsForCell(short row, short column){
     short neighbors = 0;        //Number of neighboring cells
-    // Left
-    if(column == 0)
-        for(int i = 0; i < 3; i++)  neighbors += cells[rows-1+i][columns-1]->isAlife();
-    else
-        for(int i = 0; i < 3; i++)  neighbors += cells[rows-1+i][columns-1]->isAlife();
-
-    // Right
-    if(column == columns-1)
-        for(int i = 0; i < 3; i++)  neighbors += cells[rows-1+i][0]->isAlife();
-    else
-        for(int i = 0; i < 3; i++)  neighbors += cells[rows-1+i][columns+1]->isAlife();
-    
-    // Up
-    if(row == 0)
-        for(int i = 0; i < 3; i++)  neighbors += cells[rows-1][column-1+i]->isAlife();
-    else
-        for(int i = 0; i < 3; i++)  neighbors += cells[row-1][column-1+i]->isAlife();
-
-    // Down
-    if(row == rows-1)
-        for(int i = 0; i < 3; i++)  neighbors += cells[0][column-1+i]->isAlife();
-    else
-        for(int i = 0; i < 3; i++)  neighbors += cells[row+1][column-1+i]->isAlife();
     
     return neighbors;
 }
@@ -50,7 +29,7 @@ short Field::getNeighborsForCell(short row, short column){
 bool Field::checkCellForLife(short row, short column){
     short neighbors = getNeighborsForCell(row, column);
     if(neighbors == 3)  return true;
-    if(neighbors == 2 && cells[row][column]->isAlife())    return true;
+    if(neighbors == 2 && cells[row*columns+columns]->isAlife())    return true;
     return false;
 }
 
@@ -58,7 +37,7 @@ bool Field::checkCellForLife(short row, short column){
 void Field::render(SDL_Renderer *renderer){
     for(short row = 0; row < rows; row++){
         for(short col = 0; col < columns; col++){
-            if(cells[row][col]->isAlife()){
+            if(cells[row*columns+col]->isAlife()){
                 SDL_Rect renderRect = { col*CELL_SIZE,
                                         row*CELL_SIZE,
                                         CELL_SIZE,
