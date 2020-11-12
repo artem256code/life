@@ -22,8 +22,8 @@ Game::Game(std::string title,short width, short height): width(width),
     window = SDL_CreateWindow(title.c_str(), 
                               SDL_WINDOWPOS_UNDEFINED, 
                               SDL_WINDOWPOS_UNDEFINED, 
-                              400, 
-                              500, 
+                              width, 
+                              height, 
                               SDL_WINDOW_OPENGL);
     if(window == nullptr){
         std::cout << "Failed create SDL_Window...";
@@ -50,6 +50,7 @@ bool Game::isRun(){
 }
 
 void Game::clear(){
+    SDL_SetRenderDrawColor(renderer, 0x00, 0x00, 0x00, 0xff);
     SDL_RenderClear(renderer);
 }
 
@@ -70,7 +71,7 @@ void Game::handleEvents(){
 
 
 void Game::update(){
-    //Some code...
+    //field->singleMoveSimulated();
 }
 
 
