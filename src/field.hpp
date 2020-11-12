@@ -12,7 +12,7 @@
 class Field{
 private:
     short rows, columns;
-    Cell ***cells;              // Two-dimensional array describing Field
+    Cell **cells;              // A one dimensional array representing a matrix of cells
 private:
 
     /**
@@ -42,7 +42,13 @@ public:
      */
     Field(short rows, short columns);
     
-    
+
+    /**
+     * @brief Simulating a single move for all cells.
+     *        Processing who should die and who should live
+     */
+    void singleMoveSimulated();
+
     /**
      * @brief Rendering Field 
      * 
