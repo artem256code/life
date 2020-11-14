@@ -12,27 +12,47 @@
 class Field{
 private:
     short rows, columns;
-    Cell **cells;              // A one dimensional array representing a matrix of cells
+    Cell ***cells;              // Matrix of cells
+    Cell ***cellsAdd;           // Cells after adding
+    Cell ***cellsDel;           // Cells after deleting
 private:
+    /**
+     * @brief  Creating the matrix of cells with sizes: rows*column
+     * @param  rows      - numbers of row in matrix
+     * @param  columns   - numbers of column in matrix
+     * @return the pointer to the created matrix
+     */
+    Cell*** createCells(short rows, short columns);
+
+
+    /**
+     * @brief Copy the matrix of cells from 'cells' in 'to'
+     * @param cells - matrix of cells
+     * @param to    - matrix of cells
+     */
+    void copyCellsTo(Cell ***cells, Cell ***to);
+
 
     /**
      * @brief Check nearest 8 cells and return value 
      * 
-     * @param row    -  row of this cell
-     * @param column -  column of this cell
+     * @param cells  - matrix in which calculations are performed
+     * @param row    - row of this cell
+     * @param column - column of this cell
      * @return true  - if cell will continue to live
      * @return false - if cell must dead 
      */
-    bool checkCellForLife(short row, short column);
+    bool checkCellForLife(Cell ***cells, short row, short column);
 
     /**
      * @brief Get the Neighboars For Cell object
-     * 
+     *
+     * @param cells     - matrix in which calculations are performed
      * @param row       -  row of this cell
      * @param column    -  column of this cell
      * @return short    -  numbers of the neighbors
      */
-    short getNeighborsForCell(short row, short column);
+    short getNeighborsForCell(Cell ***cells, short row, short column);
 public:
     /**
      * @brief Construct a new Field object
