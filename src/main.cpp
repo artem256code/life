@@ -1,7 +1,7 @@
 #include "game.hpp"
 
 int main(){
-    Game game("Life", 400, 250);    
+    Game game("Life", 120, 120);
 
     while(game.isRun()){
         game.clear();
