@@ -64,6 +64,12 @@ public:
     
 
     /**
+     * @brief Clear the Field
+     */
+    void clear();
+
+
+    /**
      * @brief Simulating a single move for all cells.
      *        Processing who should die and who should live
      */

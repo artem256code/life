@@ -27,6 +27,17 @@ Field::Field(short rows, short columns): rows(rows), columns(columns) {
 }
 
 
+void Field::clear(){
+    for(short row = 0; row < rows; row++){
+        for(short col = 0; col < columns; col++){
+            cells[row][col]->kill();
+        }
+    }
+    copyCellsTo(cells, cellsAdd);
+    copyCellsTo(cells, cellsDel);
+}
+
+
 void Field::copyCellsTo(Cell ***cells, Cell ***to){
     for(short row = 0; row < rows; row++){
         for(short col = 0; col < columns; col++){
