@@ -24,14 +24,14 @@ Game::Game(std::string title,short width, short height): width(width),
                               SDL_WINDOWPOS_UNDEFINED, 
                               width, 
                               height, 
-                              SDL_WINDOW_OPENGL);
+                              0);
     if(window == nullptr){
         std::cout << "Failed create SDL_Window...";
     }
 
     renderer = SDL_CreateRenderer(window, 
                                   -1, 
-                                  SDL_RENDERER_ACCELERATED);
+                                  0);
     if(renderer == nullptr){
         std::cout << "Failed create SDL_Renderer";
     }
