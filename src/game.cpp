@@ -68,6 +68,9 @@ void Game::handleEvents(){
                     case SDLK_ESCAPE:
                         close();
                         break;
+                    case SDLK_DELETE:
+                        field->clear();
+                        break;
                 }
                 break;
             case SDL_MOUSEBUTTONDOWN:
