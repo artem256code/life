@@ -9,7 +9,7 @@
 
 #include "field.hpp"
 
-#define FPS   30
+#define FPS   20
 
 /**
  * @brief the main class of the game. 
@@ -24,6 +24,7 @@ private:
     Uint32 elapsed_time;        // Elapsed time since the beginning of the game
     short width, height;        // The sizes of the game window 
     bool is_run;                // Is the game running? (true/false)
+    bool simulated;             // Is the simulated running? (true/fasle)
 private:
     /**
      * @brief Closing the game
