@@ -14,7 +14,7 @@ SDL_Renderer* Game::renderer;
 
 
 Game::Game(std::string title,short width, short height): width(width), 
-    height(height), is_run(true), elapsed_time(0) {
+    height(height), is_run(true), elapsed_time(0), simulated(false) {
     
     if(SDL_Init(SDL_INIT_EVERYTHING) != 0){
         std::cout << "Failed init SDL lib...";
@@ -60,7 +60,15 @@ void Game::handleEvents(){
         switch (event.type) {
             case SDL_QUIT:      close();    break;
             case SDL_KEYDOWN:   
-                // Some code...
+                switch(event.key.keysym.sym){
+                    case SDLK_SPACE:
+                        if(simulated)   simulated = false;
+                        else            simulated = true;
+                        break;
+                    case SDLK_ESCAPE:
+                        close();
+                        break;
+                }
                 break;
             case SDL_MOUSEBUTTONDOWN:
                 // Some code...
@@ -71,7 +79,7 @@ void Game::handleEvents(){
 
 
 void Game::update(){
-    //field->singleMoveSimulated();
+    if(simulated)   field->singleMoveSimulated();
 }
 
 
