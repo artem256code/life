@@ -55,6 +55,21 @@ private:
     short getNeighborsForCell(Cell ***cells, short row, short column);
 public:
     /**
+     * @brief Return the condition of cell (if the cell is alive -> true, else -> false)
+     * @param row      - row of cell
+     * @param col      - column of cell
+     * @return         - true - 'if the cell is alive', false - 'if the cell is dead'
+     */
+    bool getConditionCell(short row, short col);
+    /**
+      * @brief Set the condition of cell (true - 'alive'; false - 'dead')
+      * @param row      - row of cell
+      * @param col      - column of cell
+      * @param isLife   - cell is live? (true/false)
+      */
+    void setConditionCell(short row, short col, bool isLife);
+
+    /**
      * @brief Construct a new Field object
      * 
      * @param rows      - numbers of rows in the Field 

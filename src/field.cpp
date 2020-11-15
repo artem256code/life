@@ -20,6 +20,26 @@ Cell*** Field::createCells(short rows, short columns){
     return newCells;
 }
 
+
+bool Field::getConditionCell(short row, short col){
+    if (cells[row][col]->isAlife()) return true;
+    return false;
+}
+
+void Field::setConditionCell(short row, short col, bool isLife){
+    if(isLife){
+        cells[row][col]->create();
+        cellsAdd[row][col]->create();
+        cellsDel[row][col]->create();
+    }
+    else{
+        cells[row][col]->kill();
+        cellsAdd[row][col]->kill();
+        cellsDel[row][col]->kill();
+    }
+}
+
+
 Field::Field(short rows, short columns): rows(rows), columns(columns) {
     cells    = createCells(rows, columns);
     cellsAdd = createCells(rows, columns);
