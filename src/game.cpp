@@ -7,6 +7,7 @@
 #include <SDL2/SDL_stdinc.h>
 #include <SDL2/SDL_timer.h>
 #include <SDL2/SDL_video.h>
+#include <SDL2/SDL_mouse.h>
 #include <iostream>
 
 
@@ -74,7 +75,16 @@ void Game::handleEvents(){
                 }
                 break;
             case SDL_MOUSEBUTTONDOWN:
-                // Some code...
+                int xMouse, yMouse;
+                SDL_GetMouseState(&xMouse, &yMouse);
+                if((xMouse >= 0 && xMouse <= width) && (yMouse >= 0 && yMouse <= height)){
+                    short row = yMouse / CELL_SIZE;
+                    short col = xMouse / CELL_SIZE;
+                    if(field->getConditionCell(row, col))
+                        field->setConditionCell(row, col, false);
+                    else
+                        field->setConditionCell(row, col, true);
+                }
                 break;
         }
     }
