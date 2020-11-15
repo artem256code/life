@@ -114,18 +114,58 @@ void Field::singleMoveSimulated(){
     copyCellsTo(cells, cellsDel);
 }
 
-
 void Field::render(SDL_Renderer *renderer){
+    // Draw cells
     for(short row = 0; row < rows; row++){
         for(short col = 0; col < columns; col++){
             if(cells[row][col]->isAlife()){
-                SDL_Rect renderRect = { col*CELL_SIZE,
+                SDL_Rect borderRect = { col*CELL_SIZE,
                                         row*CELL_SIZE,
                                         CELL_SIZE,
                                         CELL_SIZE};
-                SDL_SetRenderDrawColor(renderer, 0x6A, 0xCA, 0x59, 0xff);
-                SDL_RenderFillRect(renderer, &renderRect);
+
+                SDL_Rect baseRect = { col*CELL_SIZE + CELL_SIZE / 10,
+                                      row*CELL_SIZE + CELL_SIZE / 10,
+                                      CELL_SIZE - CELL_SIZE / 5,
+                                      CELL_SIZE - CELL_SIZE / 5};
+
+                SDL_Rect flareRect = { col*CELL_SIZE + CELL_SIZE / 5,
+                                       row*CELL_SIZE + CELL_SIZE / 5,
+                                       CELL_SIZE / 4,
+                                       CELL_SIZE / 4};
+
+                SDL_Rect smallFlareRect1 = { col*CELL_SIZE + CELL_SIZE / 2 - CELL_SIZE / 10,
+                                             row*CELL_SIZE + CELL_SIZE / 5,
+                                             CELL_SIZE / 5,
+                                             CELL_SIZE / 5};
+
+                SDL_Rect smallFlareRect2 = { col*CELL_SIZE + CELL_SIZE / 5,
+                                             row*CELL_SIZE + CELL_SIZE / 2 - CELL_SIZE / 10,
+                                             CELL_SIZE / 5,
+                                             CELL_SIZE / 5};
+
+                SDL_SetRenderDrawColor(renderer, 0x31, 0x6b, 0x3f, 0xff);
+                SDL_RenderFillRect(renderer, &borderRect);
+                SDL_SetRenderDrawColor(renderer, 0x57, 0x8e, 0x64, 0xff);
+                SDL_RenderFillRect(renderer, &baseRect);
+                SDL_SetRenderDrawColor(renderer, 0x70, 0xa2, 0x7c, 0xff);
+                SDL_RenderFillRect(renderer, &flareRect);
+                SDL_RenderFillRect(renderer, &smallFlareRect1);
+                SDL_RenderFillRect(renderer, &smallFlareRect2);
             }
+        }
+    }
+    // Draw lines
+    for(short row = 0; row <= rows; row++){
+        // Y lines
+        SDL_Rect yRect = {0, row*CELL_SIZE, rows*CELL_SIZE, CELL_SIZE/10};
+        SDL_SetRenderDrawColor(renderer, 0x15, 0x1a, 0x1e, 0xff);
+        SDL_RenderFillRect(renderer, &yRect);
+        for(short col = 0; col <= columns; col++){
+            // X lines
+            SDL_Rect xRect = {col*CELL_SIZE, 0, CELL_SIZE/10, columns*CELL_SIZE};
+            SDL_SetRenderDrawColor(renderer, 0x15, 0x1a, 0x1e, 0xff);
+            SDL_RenderFillRect(renderer, &xRect);
         }
     }
 }
