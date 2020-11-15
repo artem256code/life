@@ -124,7 +124,7 @@ void Field::render(SDL_Renderer *renderer){
                                         CELL_SIZE,
                                         CELL_SIZE};
                 SDL_SetRenderDrawColor(renderer, 0x6A, 0xCA, 0x59, 0xff);
-                SDL_RenderDrawRect(renderer, &renderRect);
+                SDL_RenderFillRect(renderer, &renderRect);
             }
         }
     }
