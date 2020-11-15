@@ -1,6 +1,7 @@
 #include "game.hpp"
 #include "cell.hpp"
 #include "field.hpp"
+#include "mouse.hpp"
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_render.h>
 #include <SDL2/SDL_events.h>
@@ -56,6 +57,18 @@ void Game::clear(){
 }
 
 
+void Game::setCellInMouseCoords()
+{
+    short row = Mouse::convertCoordYToRow();
+    short col = Mouse::convertCoordXToColumn();
+    if(event.button.button == SDL_BUTTON_LEFT){
+        field->setConditionCell(row, col, true);
+    }
+    else{
+        field->setConditionCell(row, col, false);
+    }
+}
+
 void Game::handleEvents(){
     while(SDL_PollEvent(&event)){
         switch (event.type) {
@@ -74,18 +87,21 @@ void Game::handleEvents(){
                         break;
                 }
                 break;
-            case SDL_MOUSEBUTTONDOWN:
-                int xMouse, yMouse;
-                SDL_GetMouseState(&xMouse, &yMouse);
-                if((xMouse >= 0 && xMouse <= width) && (yMouse >= 0 && yMouse <= height)){
-                    short row = yMouse / CELL_SIZE;
-                    short col = xMouse / CELL_SIZE;
-                    if(field->getConditionCell(row, col))
-                        field->setConditionCell(row, col, false);
-                    else
-                        field->setConditionCell(row, col, true);
+            case SDL_MOUSEMOTION:
+                if(Mouse::isPressed()){
+                    setCellInMouseCoords();
+                    break;
                 }
                 break;
+            case SDL_MOUSEBUTTONDOWN:
+                setCellInMouseCoords();
+                Mouse::press();
+                break;
+            case SDL_MOUSEBUTTONUP:
+                setCellInMouseCoords();
+                Mouse::notPress();
+                break;
+
         }
     }
 }

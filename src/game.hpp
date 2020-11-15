@@ -92,6 +92,11 @@ public:
      */
     static SDL_Renderer* getRenderer();
 
+
+    /**
+     * @brief Sets the state of the cell depending on the mouse coordinate.
+     */
+    void setCellInMouseCoords();
 };
 
 #endif
