@@ -25,12 +25,30 @@ private:
     short width, height;        // The sizes of the game window 
     bool is_run;                // Is the game running? (true/false)
     bool simulated;             // Is the simulated running? (true/fasle)
+    bool hiddenHelp;            // Help is hidden? (true/false)
 private:
     /**
      * @brief Closing the game
      * 
      */
     void close();
+
+    /**
+     * @brief   Rendering the help-manual
+     */
+    void viewHelp();
+
+
+    /**
+     * @brief   To show the help
+     */
+    void showHelp();
+
+
+    /**
+     * @brief To hide the help
+     */
+    void hideHelp();
 public:
     /**
      * @brief Construct a new Game object
